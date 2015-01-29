@@ -1,0 +1,11 @@
+.dropdown-menu {
+	min-width: 0;
+}
+
+p.style-1{
+	text-indent: 28px;
+	line-height: 2;
+}
+.dropdown-menu>li>a{
+	padding: 10px 20px;
+}
