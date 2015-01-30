@@ -75,11 +75,11 @@
 							服务 <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">预约保养美容</a>
+							<li><a href="yy_save.html">预约保养美容</a>
 							</li>
-							<li><a href="#">洗车问题咨询</a>
+							<li><a href="question.html">洗车问题咨询</a>
 							</li>
-							<li><a href="#">上门取车</a>
+							<li><a href="get_car.html">上门取车</a>
 							</li>
 						</ul>
 					</div>
@@ -89,11 +89,11 @@
 							记录 <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">保养维修记录</a>
+							<li><a href="save_record.html">保养维修记录</a>
 							</li>
-							<li><a href="#">违章记录</a>
+							<li><a href="illegal_recode.html">违章记录</a>
 							</li>
-							<li><a href="#">绑定账号</a>
+							<li><a href="bind_account.html">绑定账号</a>
 							</li>
 						</ul>
 					</div>
@@ -105,15 +105,16 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="about.html">关于德工</a>
 							</li>
-							<li><a href="#">德工技师</a>
+							<li><a href="technician.html">德工技师</a>
 							</li>
-							<li><a href="#">业务介绍</a>
+							<li><a href="work_list.html">业务介绍</a>
 							</li>
-							<li class="active"><a href="javascript:void(0)">德工地址</a>
+							<li class="active"><a href="address.html">德工地址</a>
 							</li>
 						</ul>
 					</div>
 				</div>
+
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
@@ -122,7 +123,7 @@
 						</li>
 						<li>关于
 						</li>
-						<li class="active">关于德工</li>
+						<li class="active">德工地址</li>
 					</ol>
 				</div>
 			</div>
@@ -148,96 +149,99 @@
 	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
 	<script type="text/javascript">
-		function getUrlParas(){
-		            var hash = location.hash,
-		                para = {},
-		                tParas = hash.substr(1).split("&");
-		            for(var p in tParas){
-		                if(tParas.hasOwnProperty(p)){
-		                    var obj = tParas[p].split("=");
-		                    para[obj[0]] = obj[1];
-		                }
-		            }
-		            return para;
-		        }
-		        var para = getUrlParas(),
-		            center = para.address?decodeURIComponent(para.address) : "新区泰伯大道447号",
-		            city = para.city?decodeURIComponent(para.city) : "无锡市";
-		    
-		        document.getElementById("keyword").value = center;
-		    
-		        var marker_trick = false;
-		        var map = new BMap.Map("map_container");
-		        map.enableScrollWheelZoom();
-		    
-		        var marker = new BMap.Marker(new BMap.Point(116.404, 39.915), {
-		            enableMassClear: false,
-		            raiseOnDrag: true
-				 });
-		        marker.enableDragging();
-		        map.addOverlay(marker);
-		    
-		        map.addEventListener("click", function(e){
-		            if(!(e.overlay)){
-		                map.clearOverlays();
-		                marker.show();
-		                marker.setPosition(e.point);
-		                setResult(e.point.lng, e.point.lat);
-		            }
-		        });
-		        marker.addEventListener("dragend", function(e){
-		            setResult(e.point.lng, e.point.lat);
-		        });
-		    
-		        var local = new BMap.LocalSearch(map, {
-		            renderOptions:{map: map},
-					 pageCapacity: 1
-		        });
-		        local.setSearchCompleteCallback(function(results){
-		            if(local.getStatus() !== BMAP_STATUS_SUCCESS){
-		                alert("无结果");
-		            } else {
-					     marker.hide();
-					 }
-		        });
-		        local.setMarkersSetCallback(function(pois){
-		            for(var i=pois.length; i--; ){
-		                var marker = pois[i].marker;
-		                marker.addEventListener("click", function(e){
-		                    marker_trick = true;
-		                    var pos = this.getPosition();
-		                    setResult(pos.lng, pos.lat);
-		                });
-		            }
-		        });
-		    
-		        window.onload = function(){
-		            local.search(center);
-		            document.getElementById("search_button").onclick = function(){
-		                local.search(document.getElementById("keyword").value);
-		            };
-		            document.getElementById("keyword").onkeyup = function(e){
-		                var me = this;
-		                e = e || window.event;
-		                var keycode = e.keyCode;
-		                if(keycode === 13){
-		                    local.search(document.getElementById("keyword").value);
-		                }
-		            };
-		        };
-		        function a(){
-		            document.getElementById("float_search_bar").style.display = "none";
-		        }
-		        a();
-		        /*
-		         * setResult : 定义得到标注经纬度后的操作
-		         * 请修改此函数以满足您的需求
-		         * lng: 标注的经度
-		         * lat: 标注的纬度
-		         */
-		        function setResult(lng, lat){
-		            document.getElementById("result").innerHTML = lng + ", " + lat;
-		        }
+		function getUrlParas() {
+			var hash = location.hash,
+				para = {},
+				tParas = hash.substr(1).split("&");
+			for (var p in tParas) {
+				if (tParas.hasOwnProperty(p)) {
+					var obj = tParas[p].split("=");
+					para[obj[0]] = obj[1];
+				}
+			}
+			return para;
+		}
+		var para = getUrlParas(),
+			center = para.address ? decodeURIComponent(para.address) : "新区泰伯大道447号",
+			city = para.city ? decodeURIComponent(para.city) : "无锡市";
+
+		document.getElementById("keyword").value = center;
+
+		var marker_trick = false;
+		var map = new BMap.Map("map_container");
+		map.enableScrollWheelZoom();
+
+		var marker = new BMap.Marker(new BMap.Point(116.404, 39.915), {
+			enableMassClear: false,
+			raiseOnDrag: true
+		});
+		marker.enableDragging();
+		map.addOverlay(marker);
+
+		map.addEventListener("click", function(e) {
+			if (!(e.overlay)) {
+				map.clearOverlays();
+				marker.show();
+				marker.setPosition(e.point);
+				setResult(e.point.lng, e.point.lat);
+			}
+		});
+		marker.addEventListener("dragend", function(e) {
+			setResult(e.point.lng, e.point.lat);
+		});
+
+		var local = new BMap.LocalSearch(map, {
+			renderOptions: {
+				map: map
+			},
+			pageCapacity: 1
+		});
+		local.setSearchCompleteCallback(function(results) {
+			if (local.getStatus() !== BMAP_STATUS_SUCCESS) {
+				alert("无结果");
+			} else {
+				marker.hide();
+			}
+		});
+		local.setMarkersSetCallback(function(pois) {
+			for (var i = pois.length; i--;) {
+				var marker = pois[i].marker;
+				marker.addEventListener("click", function(e) {
+					marker_trick = true;
+					var pos = this.getPosition();
+					setResult(pos.lng, pos.lat);
+				});
+			}
+		});
+
+		window.onload = function() {
+			local.search(center);
+			document.getElementById("search_button").onclick = function() {
+				local.search(document.getElementById("keyword").value);
+			};
+			document.getElementById("keyword").onkeyup = function(e) {
+				var me = this;
+				e = e || window.event;
+				var keycode = e.keyCode;
+				if (keycode === 13) {
+					local.search(document.getElementById("keyword").value);
+				}
+			};
+		};
+
+		function a() {
+			document.getElementById("float_search_bar").style.display = "none";
+		}
+		a();
+		/*
+		 * setResult : 定义得到标注经纬度后的操作
+		 * 请修改此函数以满足您的需求
+		 * lng: 标注的经度
+		 * lat: 标注的纬度
+		 */
+		function setResult(lng, lat) {
+			document.getElementById("result").innerHTML = lng + ", " + lat;
+		}
 	</script>
 
 </html>

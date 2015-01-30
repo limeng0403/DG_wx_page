@@ -6,6 +6,18 @@ p.style-1{
 	text-indent: 28px;
 	line-height: 2;
 }
+p.style-2{
+	text-indent: 28px;
+	line-height: 1.5;
+	color: #666;
+}
+p.style-3{
+	line-height: 1.5;
+	color: #666;
+}
 .dropdown-menu>li>a{
 	padding: 10px 20px;
+}
+.breadcrumb *{
+	font-size: 12px;
 }
